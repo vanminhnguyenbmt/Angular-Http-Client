@@ -19,6 +19,14 @@ export class TodoService {
     return this.http.post<Todo>(this.API, todo);
   }
 
+  updateTodo(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`${this.API}/${todo.id}`, todo);
+  }
+
+  deleteTodo(id): Observable<Todo> {
+    return this.http.delete<Todo>(`${this.API}/${id}`);
+  }
+
   handleError(err) {
     if (err.error instanceof Error) {
       console.log(`Client side error: ${err.error.message}`);

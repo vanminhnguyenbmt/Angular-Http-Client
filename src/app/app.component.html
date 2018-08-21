@@ -7,6 +7,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Completed</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +15,10 @@
             <td>{{ item.id }}</td>
             <td>{{ item.title }}</td>
             <td>{{ item.completed ? 'Completed' : 'InProgress' }}</td>
+            <td>
+              <button type="button" class="btn btn-primary" (click)="onEditTodo(item)">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="onDeleteTodo(item.id)">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -34,6 +39,21 @@
         <button type="submit" class="btn btn-primary" (click)="onAddToDo()">Add</button>
       </form>
       
+      <form *ngIf="todo">
+        <legend>Edit TODO</legend>
+
+        <div class="form-group">
+          <label for="">Title</label>
+          <input type="text" class="form-control" [(ngModel)]="todo.title" name="title">
+        </div>
+
+        <select class="form-control" [(ngModel)]="todo.completed" name="completed">
+          <option value="true">Completed</option>
+          <option value="false">InProgress</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary" (click)="onUpdateTodo()">Save</button>
+      </form>
     </div>
   </div>
 </div>
